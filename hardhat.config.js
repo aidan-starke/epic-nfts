@@ -20,6 +20,6 @@ module.exports = {
     }
   },
   paths: {
-    artifacts: "./client/src/artifacts"
+    artifacts: "./react-app/src/artifacts"
   },
 };
