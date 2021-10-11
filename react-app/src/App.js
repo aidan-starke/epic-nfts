@@ -118,6 +118,8 @@ const App = () => {
 
         console.log(`Mined, see transaction: https://rinkeby.etherscan.io/tx/${nftTxn.hash}`)
 
+        let minted = await connectedContract.totalSupply()
+        setMinted(minted.toString())
       } else {
         console.log("Ethereum object doesn't exist!")
       }
@@ -144,21 +146,21 @@ const App = () => {
     <div className="App">
       <div className="container">
         <div className="header-container">
-          <p className="header gradient-text">My NFT Collection</p>
+          <p className="header gradient-text">SVG NFT Generation</p>
           <p className="sub-text">
-            Each unique. Each beautiful. Discover your NFT today.
+            Mint your own unique NFT!
           </p>
           {currentAccount === "" ? (
-            <button onClick={connectWallet} className="cta-button connect-wallet-button" >
+            <button onClick={connectWallet} className="cta-button connect-wallet-button" style={{ marginBottom: '50px' }} >
               Connect to Wallet
             </button>
           ) : mint}
         </div>
         <Content>
-          <Card style={{ width: 350, margin: '50px auto', background: '-webkit-linear-gradient(left, #60c657, #35aee2)' }} bordered={false}>
+          {currentAccount !== "" && <Card style={{ width: 350, margin: '50px auto', background: '-webkit-linear-gradient(left, #60c657, #35aee2)' }} bordered={false}>
             <Progress percent={Math.round(minted / 50 * 100)} />
             <Card.Meta description={`${minted}/50 NFTs Minted`} />
-          </Card>
+          </Card>}
           {openSeaLink === 'loading' &&
             <div style={{ margin: '0 auto' }}>
               <Spin indicator={antIcon} tip='Mining...please wait!' />
